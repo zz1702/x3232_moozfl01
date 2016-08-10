@@ -1,3 +1,6 @@
+# x3232_moozfl01
+Connect my linux PC ttyS to MAX3232CPE to RPi 2 B
+
 moo is my main linux machine. It is on a Gigabyte (a Taiwan company I
 think) motherboard GA-B85M-DS3H, which has a set of 9 pins of a COM
 port, or ttyS0 on linux. As stated in the manual, Pin 2 is NSIN which
