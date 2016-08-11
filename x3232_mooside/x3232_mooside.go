@@ -24,6 +24,7 @@ func main() {
 		return
 	}
 
+	// Reset fd0 to normal when we exit
 	{
 		var attr C.struct_termios
 		if status, err := C.tcgetattr(fd0, &attr); status != 0 {
@@ -39,7 +40,9 @@ func main() {
 			log.Print("tcgetattr on fd0: ", err)
 			return
 		}
-		attr.c_lflag &= ^C.tcflag_t(C.ECHO)
+		attr.c_lflag &= ^C.tcflag_t(C.ECHO | C.ICANON)
+		attr.c_cc[C.VMIN] = 1
+		attr.c_cc[C.VTIME] = 0
 		if status, err := C.tcsetattr(fd0, C.TCSANOW, &attr); status != 0 {
 			log.Print("tcsetattr on fd0: ", err)
 			return
